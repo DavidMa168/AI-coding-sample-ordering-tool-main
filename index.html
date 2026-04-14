@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>內部點餐系統</title>
+    <!-- 引入 Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- 引入自訂樣式 -->
+    <link rel="stylesheet" href="all.css">
+    <!-- 引入 Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <!-- 背景容器 -->
+    <div class="bg-container"></div>
+    <div class="bg-blur-overlay"></div>
+
+    <main class="app-container">
+        <!-- 登入區塊 -->
+        <section id="login-section" class="card fade-in">
+            <h1 class="title">歡迎使用點餐系統</h1>
+            <p class="subtitle">請先使用公司 Google 帳號登入驗證您的身分</p>
+            <button id="login-btn" class="btn btn-primary">Google 登入</button>
+            <p id="login-msg" class="msg-text"></p>
+        </section>
+
+        <!-- 管理員區塊 -->
+        <section id="admin-section" class="card hidden fade-in">
+            <h2 class="section-title">管理員專區 - 今日點餐設定</h2>
+            <div class="admin-controls">
+                <div class="form-group">
+                    <label for="meal-type">餐別設定：</label>
+                    <select id="meal-type" class="form-control">
+                        <option value="午餐" selected>午餐</option>
+                        <option value="下午茶">下午茶</option>
+                        <option value="晚餐">晚餐</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>今日開放餐廳 (可複選)：</label>
+                    <div id="restaurant-checkboxes" class="checkbox-group">
+                        <!-- 由 JS 渲染餐廳列表 -->
+                        <span class="loading-text">載入餐廳資料中...</span>
+                    </div>
+                </div>
+                <button id="save-config-btn" class="btn btn-success">儲存今日設定</button>
+                <div class="divider"></div>
+                <button id="clear-orders-btn" class="btn btn-danger">清空今日點餐紀錄</button>
+            </div>
+            <p id="admin-msg" class="msg-text"></p>
+        </section>
+
+        <!-- 點餐區塊 -->
+        <section id="order-section" class="card hidden fade-in">
+            <h2 class="section-title">今日點餐</h2>
+            <div class="user-info">
+                <span id="user-info-text"></span>
+                <button id="logout-btn" class="btn btn-outline-sm">登出</button>
+            </div>
+            <div id="today-config-info" class="info-box">
+                <!-- 顯示目前的出餐類型與餐廳 -->
+            </div>
+            
+            <div id="menu-container" class="menu-grid">
+                <!-- 由 JS 渲染餐點卡片 -->
+                <p class="loading-text">載入菜單中... 請稍候</p>
+            </div>
+            <p id="order-msg" class="msg-text"></p>
+        </section>
+
+        <!-- 訂單確認區塊 -->
+        <section id="orders-list-section" class="card hidden fade-in">
+            <h2 class="section-title">今日訂單明細</h2>
+            <button id="copy-orders-btn" class="btn btn-info">一鍵複製訂單 (用於 LINE)</button>
+            <div class="table-responsive">
+                <table id="orders-table" class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>訂購人</th>
+                            <th>餐別</th>
+                            <th>餐廳</th>
+                            <th>餐點</th>
+                            <th>金額</th>
+                            <th>備註</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-tbody">
+                        <!-- 由 JS 渲染訂單列表 -->
+                    </tbody>
+                    <tfoot id="orders-tfoot">
+                        <!-- 由 JS 渲染合計金額 -->
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 引入主要邏輯 -->
+    <script src="all.js"></script>
+</body>
+</html>

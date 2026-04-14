@@ -1,0 +1,393 @@
+/* ==================================
+   CSS 變數設定 (明亮色系、色彩與陰影)
+   ================================== */
+:root {
+    --primary-color: #ff7e5f;
+    --primary-hover: #feb47b;
+    --success-color: #4CAF50;
+    --success-hover: #45a049;
+    --danger-color: #f44336;
+    --danger-hover: #da190b;
+    --info-color: #2196F3;
+    --info-hover: #0b7dda;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --bg-card: rgba(255, 255, 255, 0.93);
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --border-radius: 12px;
+}
+
+/* ==================================
+   全域設定與 Reset
+   ================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+/* ==================================
+   背景與毛玻璃設計
+   ================================== */
+.bg-container {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* 使用 Unsplash 餐廳高畫質圖片作為底圖 */
+    background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
+
+.bg-blur-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* 建立亮度提高與微毛玻璃效果，讓前景清楚呈現 */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+/* ==================================
+   主容器與結構
+   ================================== */
+.app-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* 共用卡片樣式 (Glassmorphism 變體) */
+.card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow-medium);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.subtitle {
+    font-size: 16px;
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--primary-color);
+    padding-left: 12px;
+}
+
+/* ==================================
+   按鈕樣式
+   ================================== */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary { background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); color: white; width: 100%; font-weight: 700;}
+.btn-success { background-color: var(--success-color); color: white; width: 100%;}
+.btn-success:hover { background-color: var(--success-hover); }
+.btn-danger { background-color: var(--danger-color); color: white; width: 100%;}
+.btn-danger:hover { background-color: var(--danger-hover); }
+.btn-info { background-color: var(--info-color); color: white; width: 100%; margin-bottom: 15px;}
+.btn-info:hover { background-color: var(--info-hover); }
+.btn-outline-sm {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 6px 12px;
+    font-size: 14px;
+}
+.btn-outline-sm:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ==================================
+   表單與輸入框
+   ================================== */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 126, 95, 0.2);
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f3f5;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 14px;
+}
+
+.checkbox-label:hover {
+    background: #e9ecef;
+}
+
+/* ==================================
+   資訊與訊息顯示
+   ================================== */
+.divider {
+    height: 1px;
+    background: #eee;
+    margin: 24px 0;
+}
+
+.msg-text {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 500;
+    min-height: 24px;
+}
+
+.msg-success { color: var(--success-color); }
+.msg-error { color: var(--danger-color); }
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #ddd;
+}
+
+#user-info-text {
+    font-weight: 700;
+    color: var(--info-color);
+    font-size: 16px;
+}
+
+.info-box {
+    background: #fff3e0;
+    border-left: 4px solid var(--primary-color);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* ==================================
+   點餐卡片網格 (Menu Grid)
+   ================================== */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.menu-card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-light);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.meal-res {
+    font-size: 12px;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.meal-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.meal-category {
+    display: inline-block;
+    font-size: 12px;
+    background: #eee;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    align-self: flex-start;
+}
+
+.meal-price {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--danger-color);
+    margin-bottom: 15px;
+}
+
+.meal-action {
+    margin-top: auto;
+}
+
+.meal-action input {
+    margin-bottom: 10px;
+}
+
+/* ==================================
+   表格樣式 (確認訂單區塊)
+   ================================== */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 15px;
+    text-align: left;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+}
+
+.styled-table thead tr {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* ==================================
+   通用輔助類別與動畫
+   ================================== */
+.hidden {
+    display: none !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.loading-text {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 20px 0;
+}
+
+/* ==================================
+   RWD 手機版
+   ================================== */
+@media (max-width: 768px) {
+    .app-container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+    
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .styled-table th, 
+    .styled-table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
